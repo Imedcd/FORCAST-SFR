@@ -622,9 +622,9 @@ with tab1:
         c3.metric("References stock", len(stock_df))
 
         with st.expander("Apercu Demandes"):
-            st.dataframe(demand_df, width=None, hide_index=True)
+            st.dataframe(demand_df, width="stretch", hide_index=True)
         with st.expander("Apercu Stock"):
-            st.dataframe(stock_df.head(20), width=None, hide_index=True)
+            st.dataframe(stock_df.head(20), width="stretch", hide_index=True)
 
         ts = datetime.now().strftime("%Y%m%d_%H%M")
         st.download_button(
@@ -696,7 +696,7 @@ with tab2:
         detail['Qté produite'] = detail['Conf|version'].map(produced).fillna(0).astype(int)
         detail['Ecart'] = detail['Demande'] - detail['Qté produite']
         detail['% Realise'] = (detail['Qté produite'] / detail['Demande'] * 100).round(1)
-        st.dataframe(detail, width=None, hide_index=True)
+        st.dataframe(detail, width="stretch", hide_index=True)
 
         if len(res['refs_bloquantes']) > 0:
             with st.expander(f"{len(res['refs_bloquantes'])} references bloquantes"):
@@ -798,7 +798,7 @@ with tab3:
                 axis=1
             )
             prio_summary['Taux %'] = (prio_summary['Produit_total'] / prio_summary['Demande_totale'] * 100).round(1)
-            st.dataframe(prio_summary, width=None, hide_index=True)
+            st.dataframe(prio_summary, width="stretch", hide_index=True)
 
         # Detail par config
         st.subheader("Detail par configuration")
@@ -806,7 +806,7 @@ with tab3:
         detail_p['Qté produite'] = detail_p['Conf|version'].map(produced_p).fillna(0).astype(int)
         detail_p['Ecart'] = detail_p['Demande'] - detail_p['Qté produite']
         detail_p['% Realise'] = (detail_p['Qté produite'] / detail_p['Demande'] * 100).round(1)
-        st.dataframe(detail_p, width=None, hide_index=True)
+        st.dataframe(detail_p, width="stretch", hide_index=True)
 
         excel_bytes_p = generate_excel_avec_prio(demand_df_p, bom_df_p, stock_df_p, res_p)
         ts = datetime.now().strftime("%Y%m%d_%H%M%S")
